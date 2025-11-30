@@ -23,3 +23,20 @@
     <div id="root"></div>
   </body>
 </html>
+<-- In Supabase SQL Editor
+CREATE TABLE movies (
+  id INTEGER PRIMARY KEY,
+  title TEXT NOT NULL,
+  original_title TEXT,
+  original_language TEXT,
+  adult BOOLEAN,
+  video BOOLEAN,
+  popularity DECIMAL,
+  
+  -- Indexes for fast filtering
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE INDEX idx_movies_language ON movies(original_language);
+CREATE INDEX idx_movies_popularity ON movies(popularity DESC);
+CREATE INDEX idx_movies_adult ON Cache bust: Sun Nov 30 20:28:58 IST 2025 -->
