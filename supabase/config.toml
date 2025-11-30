@@ -1,0 +1,10 @@
+project_id = "lsnszbwimarnrfrbzsal"
+
+[functions.get-recommendations]
+verify_jwt = false
+
+[functions.get-replacement]
+verify_jwt = false
+
+[functions.get-feedback]
+verify_jwt = false
