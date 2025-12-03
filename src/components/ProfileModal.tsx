@@ -12,7 +12,7 @@ interface ProfileModalProps {
 }
 
 const AGE_BRACKETS = ["Under 18", "18-24", "25-34", "35-44", "45-54", "55+"];
-const GENDERS = ["male", "female", "non-binary", "prefer-not-to-say"];
+const GENDERS = ["male", "female", "non-binary"];
 const AVAILABLE_GENRES = [
   "Action", "Comedy", "Drama", "Romance", "Thriller", "Horror",
   "Sci-Fi", "Fantasy", "Mystery", "Documentary", "Animation", "Musical",
@@ -25,9 +25,6 @@ export const ProfileModal = ({ open, onComplete }: ProfileModalProps) => {
   const [genre1, setGenre1] = useState("");
   const [genre2, setGenre2] = useState("");
   const [genre3, setGenre3] = useState("");
-  
-  // Debug logging
-  console.log("ProfileModal render - open:", open);
 
   const handleSubmit = () => {
     if (age && gender && genre1 && genre2 && genre3) {
@@ -93,7 +90,7 @@ export const ProfileModal = ({ open, onComplete }: ProfileModalProps) => {
 
           <div className="space-y-3">
             <Label>Gender</Label>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-3 gap-2">
               {GENDERS.map((g) => (
                 <Button
                   key={g}
@@ -105,7 +102,7 @@ export const ProfileModal = ({ open, onComplete }: ProfileModalProps) => {
                     gender === g && "bg-primary text-primary-foreground"
                   )}
                 >
-                  {g === "prefer-not-to-say" ? "Prefer not to say" : g}
+                  {g}
                 </Button>
               ))}
             </div>

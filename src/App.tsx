@@ -1,33 +1,35 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Index from "./pages/Index";
 import Finder from "./pages/Finder";
 import Results from "./pages/Results";
-import AdminFeedback from "./pages/AdminFeedback";
-import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient();
+// Handle GitHub Pages SPA routing
+function RouteHandler() {
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const path = params.get('p');
+    if (path) {
+      navigate(path, { replace: true });
+    }
+  }, [navigate]);
+  
+  return null;
+}
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/finder" element={<Finder />} />
-          <Route path="/results" element={<Results />} />
-          <Route path="/admin/feedback" element={<AdminFeedback />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+function App() {
+  return (
+    <BrowserRouter basename="/goodwatch">
+      <RouteHandler />
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/finder" element={<Finder />} />
+        <Route path="/results" element={<Results />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
 
 export default App;
